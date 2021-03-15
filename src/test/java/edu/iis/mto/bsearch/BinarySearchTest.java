@@ -18,7 +18,7 @@ class BinarySearchTest {
         int seq [] = {10};
         SearchResult search = BinarySearch.search(key, seq);
         assertTrue(search.isFound());
-        assertEquals(search.getPosition(), seq);
+        assertEquals(search.getPosition(), 1);
     }
 
     @Test
@@ -56,6 +56,29 @@ class BinarySearchTest {
         SearchResult searchResult = BinarySearch.search(key, seq);
         assertTrue(searchResult.isFound());
         assertEquals(searchResult.getPosition(), 6);
+    }
+
+    @Test
+    void emptySeqTest(){
+        int key = 10;
+        int seq [] = {};
+        try {
+            SearchResult searchResult = BinarySearch.search(key, seq);
+            fail("Expected exception");
+
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void longSeqNotFoundTest(){
+        int key = 10;
+        int seq [] = {-120, 30, 102, 405, 555, 1244, 9054, 10000, 12000, 4567890, 44444444};
+        SearchResult searchResult = BinarySearch.search(key, seq);
+        assertFalse(searchResult.isFound());
+        assertEquals(searchResult.getPosition(), -1);
+
     }
 
 }
