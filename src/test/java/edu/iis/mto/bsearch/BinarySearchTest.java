@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.nio.Buffer;
+
 
 class BinarySearchTest {
 
@@ -79,6 +81,31 @@ class BinarySearchTest {
         assertFalse(searchResult.isFound());
         assertEquals(searchResult.getPosition(), -1);
 
+    }
+
+    @Test
+    void sequenceWithDuplicatesTest(){
+        int key = 10;
+        int seq [] = {102, 103, 400, 400};
+        try {
+            SearchResult searchResult = BinarySearch.search(key, seq);
+            fail("Expected exception");
+
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void notSortedSequence(){
+        int key = 10;
+        int seq [] = {-2, 10, 0, 34};
+        try {
+            SearchResult searchResult = BinarySearch.search(key, seq);
+            fail("Excepted exception");
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
     }
 
 }
